@@ -34,10 +34,13 @@
             const userMessage = `<p class="user-message"><strong>You:</strong> ${userInput}</p>`;
             chatbox.innerHTML += userMessage;
 
-            fetch('/send_message', {
+            fetch('https://plmoros-1958-dgwha.westeurope.inference.ml.azure.com/score', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `message=${encodeURIComponent(userInput)}`
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': '5iDVKNsvWlgBeun50tcd7utFBp0fldaubmDKrADophJ6WvRIigcbJQQJ99BBAAAAAAAAAAAAINFRAZML4geb' // Reemplaza YOUR_API_KEY con tu clave de API real
+                },
+                body: JSON.stringify({ message: userInput })
             })
                 .then(response => response.json())
                 .then(data => {
